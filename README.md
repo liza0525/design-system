@@ -19,7 +19,24 @@
 
 ## 사용법
 
+### 단순하게 쓰기 (clone + gitignore)
+
+혼자 쓰는 프로젝트라면 이게 더 단순해요.
+
+```bash
+# 처음 세팅
+git clone <이-레포-URL> design-system
+echo "design-system/" >> .gitignore
+
+# 업데이트할 때
+git -C design-system pull
+```
+
+버전을 git이 추적하지 않는다는 차이만 있고, 솔로 프로젝트에선 문제없어요.
+
 ### Git Submodule로 다른 프로젝트에서 사용하기
+
+버전을 고정하고 싶을 때 (팀 프로젝트 등).
 
 **1. 처음 추가**
 
