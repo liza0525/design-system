@@ -19,17 +19,45 @@
 
 ## 사용법
 
-### 새 프로젝트에 tokens 적용
+### Git Submodule로 다른 프로젝트에서 사용하기
+
+**1. 처음 추가**
+
+```bash
+# 프로젝트 루트에서
+git submodule add <이-레포-URL> design-system
+git commit -m "Add design-system submodule"
+```
+
+**2. 이 레포를 포함한 프로젝트를 클론할 때**
+
+```bash
+git clone --recurse-submodules <프로젝트-URL>
+
+# 이미 클론한 경우
+git submodule update --init
+```
+
+**3. 디자인 시스템 최신 버전으로 업데이트**
+
+```bash
+git submodule update --remote design-system
+git commit -m "Update design-system"
+```
+
+**4. tokens.css import**
 
 ```css
 /* globals.css */
-@import "../path/to/tokens.css";
+@import "./design-system/tokens.css";
 ```
 
-### AI 작업 시
+**5. AI 작업 시**
 
-`design-system.md`를 컨텍스트로 첨부하거나, Claude Code를 이 레포 위에서 실행하면 `SKILL.md` 트리거 조건에 따라 자동 적용된다.
+```
+design-system/design-system.md 읽어서 적용해줘
+```
 
 ### 프로젝트별 적용 가이드
 
-각 프로젝트 레포에 `DESIGN_LOG.md`를 두어 미정의 컴포넌트 처리 기준, 실제 적용 내역을 기록한다 (이 레포는 범용 원칙만 관리).
+프로젝트 레포에 `DESIGN_LOG.md`를 두어 미정의 컴포넌트 처리 기준, 실제 적용 내역을 기록한다 (이 레포는 범용 원칙만 관리).
