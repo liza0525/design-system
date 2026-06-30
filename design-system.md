@@ -78,10 +78,12 @@
 ```html
 <link rel="stylesheet" href="tokens.css" />
 <link rel="stylesheet" href="base.css" />
+<link rel="stylesheet" href="components.css" />
 ```
 
 `tokens.css` — CSS 변수 정의 (색, 폰트, 타입 스케일, 레이아웃, 애니메이션)  
-`base.css` — 토큰을 전역에 적용 (reset, body, heading, link 기본값)
+`base.css` — 토큰을 전역에 적용 (reset, body, heading, link 기본값)  
+`components.css` — 재사용 클래스 (.card, .btn-pill, .callout, .eyebrow, .timeline...)
 
 ### 타입 스케일 (발표자료 기준)
 

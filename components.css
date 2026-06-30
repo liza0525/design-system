@@ -1,0 +1,191 @@
+/* Lizzie Design System — Components */
+/* tokens.css → base.css → components.css 순서로 로드 */
+
+/* ─── Eyebrow ───────────────────────────────────────────── */
+
+.eyebrow {
+  font-family: var(--font-sans);
+  font-size: var(--text-eyebrow);
+  font-weight: var(--weight-semibold);
+  letter-spacing: var(--tracking-eyebrow);
+  text-transform: uppercase;
+  color: var(--muted);
+}
+
+/* ─── Card ──────────────────────────────────────────────── */
+
+.card {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius-card);
+  padding: 1.25rem 1.5rem;
+}
+
+.card-label {
+  font-family: var(--font-sans);
+  font-size: var(--text-card-label);
+  font-weight: var(--weight-semibold);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--accent2);
+}
+
+.card-title {
+  font-family: var(--font-sans);
+  font-size: var(--text-card-title);
+  font-weight: var(--weight-semibold);
+  color: var(--text);
+}
+
+.card-desc {
+  font-family: var(--font-serif);
+  font-size: var(--text-card-desc);
+  color: var(--muted);
+  line-height: 1.6;
+}
+
+/* ─── Card group ────────────────────────────────────────── */
+/* 카드들을 gap 없이 붙이고 border-right로 구분 */
+
+.card-group {
+  display: grid;
+  max-width: var(--max-w-card);
+}
+
+.card-group .card {
+  border-right: none;
+}
+
+.card-group .card:not(:last-child) {
+  border-right: 1px solid var(--border);
+}
+
+/* ─── Button ────────────────────────────────────────────── */
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4em;
+  font-family: var(--font-sans);
+  font-size: 0.9rem;
+  font-weight: var(--weight-semibold);
+  cursor: pointer;
+  border: none;
+  transition: opacity 0.15s ease;
+}
+
+.btn:hover {
+  opacity: 0.85;
+}
+
+/* pill — 랜딩페이지용 */
+.btn-pill {
+  border-radius: var(--radius-pill);
+  background: var(--accent);
+  color: #fff;
+  padding: 0.55em 1.4em;
+}
+
+/* ghost — 발표자료 네비게이션용 */
+.btn-ghost {
+  border-radius: var(--radius-card);
+  background: transparent;
+  color: var(--text);
+  padding: 0.4em 0.8em;
+}
+
+/* ─── Callout ───────────────────────────────────────────── */
+
+.callout {
+  border-left: 4px solid var(--callout-gray-border);
+  background: var(--callout-gray-bg);
+  padding: 0.75rem 1rem;
+  font-family: var(--font-serif);
+  font-size: var(--text-card-desc);
+  line-height: 1.6;
+}
+
+.callout-gray   { border-color: var(--callout-gray-border);   background: var(--callout-gray-bg);   }
+.callout-brown  { border-color: var(--callout-brown-border);  background: var(--callout-brown-bg);  }
+.callout-orange { border-color: var(--callout-orange-border); background: var(--callout-orange-bg); }
+.callout-yellow { border-color: var(--callout-yellow-border); background: var(--callout-yellow-bg); }
+.callout-green  { border-color: var(--callout-green-border);  background: var(--callout-green-bg);  }
+.callout-blue   { border-color: var(--callout-blue-border);   background: var(--callout-blue-bg);   }
+.callout-purple { border-color: var(--callout-purple-border); background: var(--callout-purple-bg); }
+.callout-pink   { border-color: var(--callout-pink-border);   background: var(--callout-pink-bg);   }
+.callout-red    { border-color: var(--callout-red-border);    background: var(--callout-red-bg);    }
+
+/* ─── Timeline (horizontal) ─────────────────────────────── */
+
+.timeline {
+  display: flex;
+  align-items: flex-start;
+  gap: 0;
+  max-width: var(--max-w-chart);
+  overflow-x: auto;
+}
+
+.timeline-item {
+  flex: 1;
+  position: relative;
+  padding-top: 1.5rem;
+}
+
+/* 연결선 */
+.timeline-item::before {
+  content: "";
+  position: absolute;
+  top: 0.45rem;
+  left: 1rem;
+  right: 0;
+  height: 1px;
+  background: var(--border);
+}
+
+.timeline-item:last-child::before {
+  display: none;
+}
+
+/* dot */
+.timeline-dot {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 0.9rem;
+  height: 0.9rem;
+  border-radius: 50%;
+  background: var(--border);
+  border: 2px solid var(--surface);
+}
+
+.timeline-item.is-active .timeline-dot {
+  background: var(--accent);
+}
+
+.timeline-label {
+  font-family: var(--font-sans);
+  font-size: var(--text-card-label);
+  font-weight: var(--weight-semibold);
+  color: var(--muted);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  padding-left: 1.4rem;
+}
+
+.timeline-title {
+  font-family: var(--font-sans);
+  font-size: var(--text-card-title);
+  font-weight: var(--weight-semibold);
+  color: var(--text);
+  padding-left: 1.4rem;
+  margin-top: 0.25rem;
+}
+
+/* ─── Slide note ────────────────────────────────────────── */
+
+.slide-note {
+  font-family: var(--font-serif);
+  font-size: var(--text-note);
+  color: var(--muted);
+  line-height: 1.6;
+}
