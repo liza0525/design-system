@@ -1,0 +1,62 @@
+/* Lizzie Design System — Design Tokens */
+
+/* ─── Base palette ─────────────────────────────────────── */
+
+:root {
+  --bg:      #f6f2eb;  /* 크림 배경 */
+  --surface: #edeae2;  /* 카드/서피스 */
+  --border:  #e4ddd0;  /* 구분선 */
+  --muted:   #9a9590;  /* 보조 텍스트 */
+  --text:    #282420;  /* 본문 오프블랙 */
+  --accent:  #3d5a80;  /* 슬레이트블루 */
+  --accent2: #b85c38;  /* 테라코타 */
+}
+
+.dark {
+  --bg:      #0d1117;
+  --surface: #161b22;
+  --border:  #21262d;
+  --muted:   #555e6a;
+  --text:    #e8e0d0;
+  --accent:  #4a7fa5;
+  --accent2: #c9b48a;
+}
+
+/* ─── Tailwind v4 @theme inline mapping ────────────────── */
+
+@theme inline {
+  --color-bg:      var(--bg);
+  --color-surface: var(--surface);
+  --color-border:  var(--border);
+  --color-muted:   var(--muted);
+  --color-ink:     var(--text);
+  --color-accent:  var(--accent);
+  --color-accent2: var(--accent2);
+}
+
+/* ─── Callout colors (Notion 9-color, retuned for cream bg) */
+/* Usage: border-left: 4px solid var(--callout-{name}-border); background: var(--callout-{name}-bg) */
+
+:root {
+  --callout-gray-bg:    #eeebe4; --callout-gray-border:   #9a9590;
+  --callout-brown-bg:   #f2ece3; --callout-brown-border:  #8c6d4f;
+  --callout-orange-bg:  #f5ece2; --callout-orange-border: #c46a2d;
+  --callout-yellow-bg:  #f5eedc; --callout-yellow-border: #b89040;
+  --callout-green-bg:   #e8ede5; --callout-green-border:  #5a8060;
+  --callout-blue-bg:    #e5ecf2; --callout-blue-border:   #3d5a80;
+  --callout-purple-bg:  #ede9f2; --callout-purple-border: #7055a0;
+  --callout-pink-bg:    #f2e8ee; --callout-pink-border:   #a06080;
+  --callout-red-bg:     #f2e8e5; --callout-red-border:    #b85c38;
+}
+
+.dark {
+  --callout-gray-bg:    #1a1e26; --callout-gray-border:   #4a5568;
+  --callout-brown-bg:   #1e1812; --callout-brown-border:  #6b4f30;
+  --callout-orange-bg:  #1e1610; --callout-orange-border: #8a4a1e;
+  --callout-yellow-bg:  #1c1a0c; --callout-yellow-border: #7a6030;
+  --callout-green-bg:   #0e1a14; --callout-green-border:  #3d6050;
+  --callout-blue-bg:    #0c1520; --callout-blue-border:   #4a7fa5;
+  --callout-purple-bg:  #160e20; --callout-purple-border: #5a4080;
+  --callout-pink-bg:    #1e1018; --callout-pink-border:   #784060;
+  --callout-red-bg:     #1e0e0c; --callout-red-border:    #a04030;
+}
