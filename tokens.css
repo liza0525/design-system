@@ -1,5 +1,44 @@
 /* Lizzie Design System — Design Tokens */
 
+/* ─── Font families ─────────────────────────────────────── */
+
+:root {
+  --font-sans:  "Pretendard", sans-serif;
+  --font-serif: "Maru Buri", serif;
+}
+
+/* ─── Type scale ────────────────────────────────────────── */
+
+:root {
+  --text-eyebrow:    0.94rem;
+  --text-h2:         clamp(2rem, 5vw, 3.6rem);
+  --text-card-label: 0.7rem;
+  --text-card-title: 1rem;
+  --text-card-desc:  0.8rem;
+  --text-note:       0.96rem;
+
+  --tracking-eyebrow: 0.22em;
+
+  --weight-black:    900;
+  --weight-semibold: 600;
+}
+
+/* ─── Layout ────────────────────────────────────────────── */
+
+:root {
+  --radius-card: 0px;
+  --radius-pill: 999px;
+
+  --max-w-card:  900px;
+  --max-w-chart: 820px;
+}
+
+/* ─── Animation ─────────────────────────────────────────── */
+
+:root {
+  --transition-slide: 0.4s ease;
+}
+
 /* ─── Base palette ─────────────────────────────────────── */
 
 :root {
@@ -20,18 +59,6 @@
   --text:    #e8e0d0;
   --accent:  #4a7fa5;
   --accent2: #c9b48a;
-}
-
-/* ─── Tailwind v4 @theme inline mapping ────────────────── */
-
-@theme inline {
-  --color-bg:      var(--bg);
-  --color-surface: var(--surface);
-  --color-border:  var(--border);
-  --color-muted:   var(--muted);
-  --color-ink:     var(--text);
-  --color-accent:  var(--accent);
-  --color-accent2: var(--accent2);
 }
 
 /* ─── Callout colors (Notion 9-color, retuned for cream bg) */
@@ -59,4 +86,35 @@
   --callout-purple-bg:  #160e20; --callout-purple-border: #5a4080;
   --callout-pink-bg:    #1e1018; --callout-pink-border:   #784060;
   --callout-red-bg:     #1e0e0c; --callout-red-border:    #a04030;
+}
+
+/* ─── Tailwind v4 @theme inline mapping ────────────────── */
+
+@theme inline {
+  /* fonts */
+  --font-family-sans:  var(--font-sans);
+  --font-family-serif: var(--font-serif);
+
+  /* type scale */
+  --font-size-eyebrow:    var(--text-eyebrow);
+  --font-size-h2:         var(--text-h2);
+  --font-size-card-label: var(--text-card-label);
+  --font-size-card-title: var(--text-card-title);
+  --font-size-card-desc:  var(--text-card-desc);
+  --font-size-note:       var(--text-note);
+
+  --letter-spacing-eyebrow: var(--tracking-eyebrow);
+
+  /* layout */
+  --border-radius-card: var(--radius-card);
+  --border-radius-pill: var(--radius-pill);
+
+  /* colors */
+  --color-bg:      var(--bg);
+  --color-surface: var(--surface);
+  --color-border:  var(--border);
+  --color-muted:   var(--muted);
+  --color-ink:     var(--text);
+  --color-accent:  var(--accent);
+  --color-accent2: var(--accent2);
 }

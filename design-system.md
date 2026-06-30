@@ -58,7 +58,7 @@
 | 역할     | 폰트       | 용도                                       |
 | -------- | ---------- | ------------------------------------------ |
 | 산세리프 | Pretendard | 제목, 레이블, 표제성 텍스트, 버튼, eyebrow |
-| 세리프   | Hahmlet    | 본문 문장, 설명 텍스트, 부연               |
+| 세리프   | Maru Buri  | 본문 문장, 설명 텍스트, 부연               |
 
 ### 폰트 불러오기
 
@@ -68,10 +68,20 @@
   href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css"
 />
 <link
-  href="https://fonts.googleapis.com/css2?family=Hahmlet:wght@400;600;900&display=swap"
   rel="stylesheet"
+  href="https://cdn.jsdelivr.net/gh/fonts-archive/MaruBuri/MaruBuri.css"
 />
 ```
+
+### CSS 파일 로드 순서
+
+```html
+<link rel="stylesheet" href="tokens.css" />
+<link rel="stylesheet" href="base.css" />
+```
+
+`tokens.css` — CSS 변수 정의 (색, 폰트, 타입 스케일, 레이아웃, 애니메이션)  
+`base.css` — 토큰을 전역에 적용 (reset, body, heading, link 기본값)
 
 ### 타입 스케일 (발표자료 기준)
 
@@ -80,14 +90,14 @@ eyebrow:     0.94rem  — Pretendard, uppercase, letter-spacing 0.22em
 section h2:  clamp(2rem, 5vw, 3.6rem)  — Pretendard, weight 900
 card-label:  0.7~1.2rem  — Pretendard, uppercase
 card-title:  1rem  — Pretendard, weight 600~700
-card-desc:   0.78~0.82rem  — Hahmlet, serif
-slide-note:  0.96rem  — Hahmlet, muted color
+card-desc:   0.78~0.82rem  — Maru Buri, serif
+slide-note:  0.96rem  — Maru Buri, muted color
 ```
 
 ### 타이포그래피 원칙
 
 - 제목/레이블/버튼 → Pretendard (산세리프)
-- 본문/설명/부연 → Hahmlet (세리프)
+- 본문/설명/부연 → Maru Buri (세리프)
 - 본문 텍스트는 완전 검정(`#000`) 대신 오프블랙(`#282420`) 사용
 - 타이포 크기 위계가 곧 정보 위계 — 색보다 크기로 먼저 말할 것
 
