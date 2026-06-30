@@ -33,6 +33,19 @@
   --max-w-chart: 820px;
 }
 
+/* ─── Spacing scale ─────────────────────────────────────── */
+
+:root {
+  --space-1:  0.25rem;   /*  4px */
+  --space-2:  0.5rem;    /*  8px */
+  --space-3:  0.75rem;   /* 12px */
+  --space-4:  1rem;      /* 16px */
+  --space-6:  1.5rem;    /* 24px */
+  --space-8:  2rem;      /* 32px */
+  --space-12: 3rem;      /* 48px */
+  --space-16: 4rem;      /* 64px */
+}
+
 /* ─── Animation ─────────────────────────────────────────── */
 
 :root {
@@ -88,6 +101,31 @@
   --callout-red-bg:     #1e0e0c; --callout-red-border:    #a04030;
 }
 
+/* ─── Dark mode (system preference) ────────────────────── */
+/* .dark 클래스(수동 토글)와 병행 — 둘 다 동작함 */
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg:      #0d1117;
+    --surface: #161b22;
+    --border:  #21262d;
+    --muted:   #555e6a;
+    --text:    #e8e0d0;
+    --accent:  #4a7fa5;
+    --accent2: #c9b48a;
+
+    --callout-gray-bg:    #1a1e26; --callout-gray-border:   #4a5568;
+    --callout-brown-bg:   #1e1812; --callout-brown-border:  #6b4f30;
+    --callout-orange-bg:  #1e1610; --callout-orange-border: #8a4a1e;
+    --callout-yellow-bg:  #1c1a0c; --callout-yellow-border: #7a6030;
+    --callout-green-bg:   #0e1a14; --callout-green-border:  #3d6050;
+    --callout-blue-bg:    #0c1520; --callout-blue-border:   #4a7fa5;
+    --callout-purple-bg:  #160e20; --callout-purple-border: #5a4080;
+    --callout-pink-bg:    #1e1018; --callout-pink-border:   #784060;
+    --callout-red-bg:     #1e0e0c; --callout-red-border:    #a04030;
+  }
+}
+
 /* ─── Tailwind v4 @theme inline mapping ────────────────── */
 
 @theme inline {
@@ -104,6 +142,16 @@
   --font-size-note:       var(--text-note);
 
   --letter-spacing-eyebrow: var(--tracking-eyebrow);
+
+  /* spacing */
+  --spacing-1:  var(--space-1);
+  --spacing-2:  var(--space-2);
+  --spacing-3:  var(--space-3);
+  --spacing-4:  var(--space-4);
+  --spacing-6:  var(--space-6);
+  --spacing-8:  var(--space-8);
+  --spacing-12: var(--space-12);
+  --spacing-16: var(--space-16);
 
   /* layout */
   --border-radius-card: var(--radius-card);
