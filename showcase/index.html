@@ -1,0 +1,232 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Lizzie Design System — Showcase</title>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/pretendard@1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.css" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/fonts-archive/MaruBuri/MaruBuri.css" />
+  <link rel="stylesheet" href="../tokens.css" />
+  <link rel="stylesheet" href="../base.css" />
+  <link rel="stylesheet" href="../components.css" />
+  <style>
+    /* 쇼케이스 페이지 자체 레이아웃 — 시스템 토큰만 사용 */
+    .page { max-width: var(--max-w-wide); margin: 0 auto; padding: var(--space-12) var(--space-4) var(--space-16); display: grid; gap: var(--space-16); }
+    .page > header { display: grid; gap: var(--space-3); }
+    .toolbar { display: flex; flex-wrap: wrap; align-items: center; gap: var(--space-2); margin-top: var(--space-2); }
+    .toolbar .btn[aria-pressed="true"] { color: var(--text); text-decoration: underline; text-decoration-color: var(--accent); text-decoration-thickness: 2px; text-underline-offset: 6px; }
+    section { display: grid; gap: var(--space-6); }
+    section > header { display: grid; gap: var(--space-1); border-bottom: 1px solid var(--border); padding-bottom: var(--space-3); }
+    .row { display: flex; flex-wrap: wrap; gap: var(--space-3); align-items: center; }
+    .grid { display: grid; gap: var(--space-4); grid-template-columns: repeat(auto-fill, minmax(12rem, 1fr)); }
+    .swatch { display: grid; gap: var(--space-2); }
+    .swatch i { display: block; height: 3.5rem; border: 1px solid var(--border); border-radius: var(--corner); }
+    .swatch b { font-size: var(--size-sm); font-weight: var(--weight-semibold); }
+    .swatch span { font-size: var(--size-xs); color: var(--subtle); font-variant-numeric: tabular-nums; }
+    .scale { display: grid; grid-template-columns: repeat(11, minmax(0, 1fr)); border: 1px solid var(--border); border-radius: var(--corner); overflow: hidden; }
+    .scale div { display: grid; gap: var(--space-1); }
+    .scale i { display: block; height: 3rem; }
+    .scale span { font-size: var(--size-xs); color: var(--subtle); text-align: center; padding-bottom: var(--space-2); }
+    .type-row { display: grid; grid-template-columns: 7rem 1fr; gap: var(--space-4); align-items: baseline; padding-block: var(--space-2); border-bottom: 1px solid var(--border); }
+    .type-row > * { min-width: 0; }
+    .post { display: grid; grid-template-columns: 6rem 1fr; gap: var(--space-1) var(--space-4); }
+    .post > * { min-width: 0; }
+    .post .tags { display: flex; flex-wrap: wrap; gap: var(--space-2); margin-top: var(--space-2); }
+    .post-title { font-size: var(--size-lg); font-weight: var(--weight-semibold); letter-spacing: var(--letter-tight); line-height: var(--line-snug); }
+    .post-sum { font-size: var(--size-sm); color: var(--muted); margin-top: var(--space-1); }
+    .demo-nav { display: flex; gap: var(--space-6); border-bottom: 1px solid var(--border); font-size: var(--size-sm); }
+    .demo-nav span { padding-bottom: var(--space-3); color: var(--muted); }
+    .demo-nav .is-on { color: var(--text); font-weight: var(--weight-semibold); box-shadow: inset 0 -2px 0 var(--accent); }
+    @media (max-width: 32rem) { .post, .type-row { grid-template-columns: 1fr; } .scale span { font-size: 0; } }
+  </style>
+</head>
+<body>
+<div class="page">
+
+  <header>
+    <p class="eyebrow">Lizzie Design System · 0.0.2</p>
+    <h1 class="display">정밀한 사람의 디자인 시스템</h1>
+    <p class="lead">tokens.css, base.css, components.css를 그대로 불러와 렌더링한 확인용 페이지예요.</p>
+    <div class="toolbar" role="group" aria-label="테마">
+      <span class="meta">테마</span>
+      <button type="button" class="btn btn-ghost" data-theme-btn="system" aria-pressed="true">시스템</button>
+      <button type="button" class="btn btn-ghost" data-theme-btn="light" aria-pressed="false">라이트</button>
+      <button type="button" class="btn btn-ghost" data-theme-btn="dark" aria-pressed="false">다크</button>
+    </div>
+  </header>
+
+  <!-- ─── Color ─── -->
+  <section>
+    <header><h2>컬러</h2><p class="meta">역할 토큰 · 배경(--bg) 대비</p></header>
+    <div class="grid" id="roles"></div>
+    <div>
+      <p class="eyebrow" style="margin-bottom: var(--space-2)">웜 그레이 원시값</p>
+      <div class="scale" id="scale"></div>
+    </div>
+  </section>
+
+  <!-- ─── Type ─── -->
+  <section>
+    <header><h2>타이포그래피</h2><p class="meta">Pretendard 기본 · Maru Buri는 .prose 안에서만 · 13px 하한</p></header>
+    <div>
+      <div class="type-row"><span class="meta">display</span><span class="display">근거 있는 구조</span></div>
+      <div class="type-row"><span class="meta">3xl · h1</span><h1>근거 있는 구조를 만드는 사람</h1></div>
+      <div class="type-row"><span class="meta">2xl · h2</span><h2>작게 시작해서 끝까지 만든 것들</h2></div>
+      <div class="type-row"><span class="meta">xl · h3</span><h3>수집부터 시각화까지</h3></div>
+      <div class="type-row"><span class="meta">lg · lead</span><p class="lead" style="max-width:none">백엔드에서 출발해 기획, 데이터, 콘텐츠까지 엮어요.</p></div>
+      <div class="type-row"><span class="meta">base</span><p>만든 것과 배운 것을 기록합니다. 숫자 2026.10.18처럼 섞여도 정렬이 흐트러지지 않아요.</p></div>
+      <div class="type-row"><span class="meta">sm · meta</span><p class="meta">2026.09.28 · 읽는 데 6분</p></div>
+      <div class="type-row"><span class="meta">xs · eyebrow</span><p class="eyebrow">프로젝트 · Projects</p></div>
+    </div>
+  </section>
+
+  <!-- ─── Controls ─── -->
+  <section>
+    <header><h2>버튼 · 태그 · 입력창</h2><p class="meta">모서리 --corner(4px) 통일</p></header>
+    <div class="row">
+      <button type="button" class="btn btn-primary">글 읽기</button>
+      <button type="button" class="btn btn-secondary">프로젝트 보기</button>
+      <button type="button" class="btn btn-ghost">소개</button>
+      <button type="button" class="btn btn-primary" disabled>비활성</button>
+    </div>
+    <div class="row">
+      <span class="tag tag-accent">백엔드</span>
+      <span class="tag tag-accent">데이터</span>
+      <span class="tag">Notion</span>
+      <span class="tag">자동화</span>
+      <span class="tag">Python</span>
+    </div>
+    <div class="row" style="max-width: 24rem">
+      <label class="meta" for="demo-search">검색</label>
+      <input id="demo-search" class="input" type="search" placeholder="글 제목이나 태그로 검색" />
+    </div>
+    <div class="demo-nav" aria-label="선택 상태 예시">
+      <span class="is-on">전체</span><span>백엔드</span><span>데이터</span><span>회고</span>
+    </div>
+  </section>
+
+  <!-- ─── Cards ─── -->
+  <section>
+    <header><h2>카드 · 카드 그룹</h2><p class="meta">바깥 테두리 하나 + 1px 구분선 · 카드 수가 열 수와 달라도 선이 겹치지 않음</p></header>
+    <div class="card" style="max-width: 22rem">
+      <p class="card-label">백엔드</p>
+      <p class="card-title">API와 데이터 모델</p>
+      <p class="card-desc">트랜잭션 경계와 인덱스를 먼저 설계해요.</p>
+    </div>
+    <div class="card-group" data-cols="3">
+      <div class="card"><p class="card-label">백엔드</p><p class="card-title">API와 데이터 모델</p><p class="card-desc">트랜잭션 경계와 인덱스를 먼저 설계해요.</p></div>
+      <div class="card"><p class="card-label">데이터</p><p class="card-title">수집부터 시각화까지</p><p class="card-desc">흩어진 로그를 질문에 답하는 표로 바꿔요.</p></div>
+      <div class="card"><p class="card-label">콘텐츠</p><p class="card-title">기록과 발표</p><p class="card-desc">만든 과정을 글과 슬라이드로 남겨요.</p></div>
+      <div class="card"><p class="card-label">자동화</p><p class="card-title">반복 작업 없애기</p><p class="card-desc">손으로 하던 정리를 크론과 스크립트로 옮겨요.</p></div>
+    </div>
+  </section>
+
+  <!-- ─── List ─── -->
+  <section>
+    <header><h2>글 목록</h2><p class="meta">.divided-list · 예시 글</p></header>
+    <ul class="divided-list">
+      <li class="post">
+        <span class="meta">2026.09.28</span>
+        <div><p class="post-title">Notion 데일리 리포트를 자동으로 쌓는 파이프라인</p><p class="post-sum">매일 아침 손으로 정리하던 리포트를 Notion API와 크론으로 옮긴 과정, 그리고 재시도 로직을 넣게 된 이유.</p><div class="tags"><span class="tag tag-accent">백엔드</span><span class="tag">Notion</span></div></div>
+      </li>
+      <li class="post">
+        <span class="meta">2026.08.17</span>
+        <div><p class="post-title">구글 타임라인 데이터로 1년치 동선 시각화하기</p><p class="post-sum">Takeout JSON을 정제하고 체류 지점을 묶어서 지도 위에 올렸다.</p><div class="tags"><span class="tag tag-accent">데이터</span><span class="tag">시각화</span></div></div>
+      </li>
+    </ul>
+  </section>
+
+  <!-- ─── Callout ─── -->
+  <section>
+    <header><h2>콜아웃</h2><p class="meta">기본 · accent · warning 세 톤</p></header>
+    <div class="callout"><span class="callout-label">메모</span>체류 판단 기준(30분, 150m)은 설정값으로 빼두면 나중에 다시 실험하기 편해요.</div>
+    <div class="callout callout-accent"><span class="callout-label">참고</span>전체 코드는 저장소의 <code>pipeline/</code> 폴더에 있어요.</div>
+    <div class="callout callout-warning"><span class="callout-label">주의</span>Notion API는 블록을 100개씩 끊어서 줘요. 페이지네이션을 빼먹으면 긴 글이 조용히 잘려요.</div>
+  </section>
+
+  <!-- ─── Prose ─── -->
+  <section>
+    <header><h2>장문 본문</h2><p class="meta">.prose · Maru Buri 16px · 줄간격 1.8</p></header>
+    <article class="prose">
+      <h2>점을 줄이고 나서야 보인 것</h2>
+      <p>처음에는 좌표를 전부 찍었더니 지도가 점으로 뒤덮였다. 그래서 같은 장소에 30분 이상 머문 기록만 남기고, 반경 150m 안의 점은 하나로 묶었다. 이렇게 줄이고 나서야 출퇴근 경로와 주말 동선이 따로 보이기 시작했다.</p>
+      <p>묶는 기준은 <code>STAY_MINUTES</code>와 <code>MERGE_RADIUS_M</code> 두 값으로 빼두었다. <a href="#">전체 설정 파일</a>은 저장소에 있다.</p>
+      <blockquote>데이터를 줄이는 건 정보를 버리는 게 아니라 질문을 고르는 일이다.</blockquote>
+      <pre><code>def merge_stays(points, radius_m=150):
+    clusters = []
+    for p in points:
+        ...</code></pre>
+    </article>
+  </section>
+
+  <!-- ─── Timeline ─── -->
+  <section>
+    <header><h2>타임라인</h2><p class="meta">점은 --corner-round 예외</p></header>
+    <div class="timeline">
+      <div class="timeline-item"><span class="timeline-dot"></span><p class="timeline-label">2026.03</p><p class="timeline-title">블로그 시작</p></div>
+      <div class="timeline-item"><span class="timeline-dot"></span><p class="timeline-label">2026.06</p><p class="timeline-title">디자인 시스템 0.0.1</p></div>
+      <div class="timeline-item is-active"><span class="timeline-dot"></span><p class="timeline-label">2026.10</p><p class="timeline-title">0.0.2 리뉴얼</p></div>
+      <div class="timeline-item"><span class="timeline-dot"></span><p class="timeline-label">다음</p><p class="timeline-title">포트폴리오 적용</p></div>
+    </div>
+  </section>
+
+</div>
+
+<script>
+  // ─── 테마 전환 (.light / .dark 클래스) ───
+  const root = document.documentElement;
+  function setTheme(t) {
+    root.classList.remove('light', 'dark');
+    if (t !== 'system') root.classList.add(t);
+    document.querySelectorAll('[data-theme-btn]').forEach(b => b.setAttribute('aria-pressed', String(b.dataset.themeBtn === t)));
+    try { localStorage.setItem('ds-showcase-theme', t); } catch (e) {}
+    requestAnimationFrame(paintContrast);
+  }
+  document.querySelectorAll('[data-theme-btn]').forEach(b => b.addEventListener('click', () => setTheme(b.dataset.themeBtn)));
+  matchMedia('(prefers-color-scheme: dark)').addEventListener('change', () => paintContrast());
+
+  // ─── 스와치 ───
+  const roles = [
+    ['--bg', '페이지 배경'], ['--surface', '카드·입력창 면'], ['--border', '장식용 구분선'],
+    ['--input-border', '입력창 테두리', 3], ['--text', '본문', 4.5], ['--muted', '보조 텍스트', 4.5],
+    ['--subtle', '메타·플레이스홀더', 4.5], ['--accent', '링크·주요 버튼', 4.5], ['--accent-soft', '코어 태그 면'],
+    ['--on-accent-soft', 'soft 면 위 글자', 4.5], ['--warning', '주의 레이블', 4.5], ['--warning-soft', '주의 콜아웃 면'],
+  ];
+  document.getElementById('roles').innerHTML = roles.map(([v, label]) =>
+    `<div class="swatch"><i style="background: var(${v})"></i><b>${v}</b><span>${label}</span><span data-contrast="${v}"></span></div>`
+  ).join('');
+  const steps = [50, 100, 200, 300, 400, 500, 600, 700, 800, 900, 950];
+  document.getElementById('scale').innerHTML = steps.map(s =>
+    `<div><i style="background: var(--gray-${s})"></i><span>${s}</span></div>`
+  ).join('');
+
+  // ─── 대비 계산: 실제로 렌더링된 색을 읽는다 ───
+  function rgb(cssColor) {
+    const probe = document.createElement('i');
+    probe.style.color = cssColor;
+    document.body.appendChild(probe);
+    const m = getComputedStyle(probe).color.match(/[\d.]+/g).map(Number);
+    probe.remove();
+    return m.slice(0, 3);
+  }
+  function lum([r, g, b]) {
+    const f = c => { c /= 255; return c <= 0.03928 ? c / 12.92 : ((c + 0.055) / 1.055) ** 2.4; };
+    return 0.2126 * f(r) + 0.7152 * f(g) + 0.0722 * f(b);
+  }
+  function paintContrast() {
+    const bg = lum(rgb('var(--bg)'));
+    roles.forEach(([v, , need]) => {
+      const el = document.querySelector(`[data-contrast="${v}"]`);
+      if (!need) { el.textContent = ''; return; }
+      const l = lum(rgb(`var(${v})`));
+      const r = (Math.max(l, bg) + 0.05) / (Math.min(l, bg) + 0.05);
+      el.textContent = `${r.toFixed(2)}:1 ${r >= need ? '통과' : '미달'} (기준 ${need}:1)`;
+    });
+  }
+
+  let saved = 'system';
+  try { saved = localStorage.getItem('ds-showcase-theme') || 'system'; } catch (e) {}
+  setTheme(saved);
+</script>
+</body>
+</html>
