@@ -2,14 +2,35 @@
 /* tokens.css → base.css → components.css 순서로 로드 */
 
 /* ─── Eyebrow ───────────────────────────────────────────── */
+/* 섹션 위의 작은 분류 표시. 대문자·넓은 자간 없이 크기와 색으로만 구분한다. */
 
 .eyebrow {
-  font-family: var(--font-sans);
-  font-size: var(--text-eyebrow);
+  font-size: var(--size-xs);
   font-weight: var(--weight-semibold);
-  letter-spacing: var(--tracking-eyebrow);
-  text-transform: uppercase;
   color: var(--muted);
+}
+
+/* ─── Text helpers ──────────────────────────────────────── */
+
+.display {
+  font-size: var(--size-display);
+  font-weight: var(--weight-bold);
+  letter-spacing: var(--letter-tight);
+  line-height: var(--line-tight);
+  text-wrap: balance;
+}
+
+.lead {
+  font-size: var(--size-lg);
+  line-height: var(--line-normal);
+  color: var(--muted);
+  max-width: 40ch;
+}
+
+.meta {
+  font-size: var(--size-sm);
+  color: var(--subtle);
+  font-variant-numeric: tabular-nums;
 }
 
 /* ─── Card ──────────────────────────────────────────────── */
@@ -17,47 +38,76 @@
 .card {
   background: var(--surface);
   border: 1px solid var(--border);
-  border-radius: var(--radius-card);
-  padding: 1.25rem 1.5rem;
+  border-radius: var(--corner);
+  padding: var(--space-4) var(--space-5);
+  display: grid;
+  gap: var(--space-1);
+  align-content: start;
 }
 
 .card-label {
-  font-family: var(--font-sans);
-  font-size: var(--text-card-label);
+  font-size: var(--size-xs);
   font-weight: var(--weight-semibold);
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  color: var(--accent2);
+  color: var(--accent);
 }
 
 .card-title {
-  font-family: var(--font-sans);
-  font-size: var(--text-card-title);
+  font-size: var(--size-base);
   font-weight: var(--weight-semibold);
+  letter-spacing: var(--letter-tight);
+  line-height: var(--line-snug);
   color: var(--text);
 }
 
 .card-desc {
-  font-family: var(--font-serif);
-  font-size: var(--text-card-desc);
+  font-size: var(--size-sm);
+  line-height: var(--line-normal);
   color: var(--muted);
-  line-height: 1.6;
 }
 
 /* ─── Card group ────────────────────────────────────────── */
-/* 카드들을 gap 없이 붙이고 border-right로 구분 */
+/* 바깥 테두리 하나 + 카드 사이 1px 구분선. 열 수: data-cols="2|3|4" (좁은 화면에선 1열).
+   구분선은 각 카드의 오른쪽·아래쪽에 1px 선을 그리고, 바깥 가장자리로 삐져나온 선은
+   overflow로 잘라낸다. 그래서 열 수와 카드 수가 맞지 않아도 선이 겹치거나 비지 않는다. */
 
 .card-group {
   display: grid;
-  max-width: var(--max-w-card);
+  grid-template-columns: 1fr;
+  max-width: var(--max-w-wide);
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--corner);
+  overflow: hidden;
 }
 
-.card-group .card {
-  border-right: none;
+.card-group > .card {
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+  box-shadow: 1px 0 0 var(--border), 0 1px 0 var(--border);  /* 그림자가 아니라 구분선 */
 }
 
-.card-group .card:not(:last-child) {
-  border-right: 1px solid var(--border);
+@media (min-width: 40rem) {
+  .card-group[data-cols="2"] { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+  .card-group[data-cols="3"] { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  .card-group[data-cols="4"] { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+}
+
+@media (min-width: 56rem) {
+  .card-group[data-cols="4"] { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+}
+
+/* ─── Divided list ──────────────────────────────────────── */
+/* 글 목록처럼 카드 없이 선으로만 나누는 목록 */
+
+.divided-list {
+  list-style: none;
+  border-top: 1px solid var(--border);
+}
+
+.divided-list > li {
+  padding-block: var(--space-4);
+  border-bottom: 1px solid var(--border);
 }
 
 /* ─── Button ────────────────────────────────────────────── */
@@ -65,70 +115,202 @@
 .btn {
   display: inline-flex;
   align-items: center;
-  gap: 0.4em;
-  font-family: var(--font-sans);
-  font-size: 0.9rem;
+  justify-content: center;
+  gap: var(--space-2);
+  font-family: var(--family-sans);
+  font-size: var(--size-sm);
   font-weight: var(--weight-semibold);
-  cursor: pointer;
-  border: none;
-  transition: opacity 0.15s ease;
-}
-
-.btn:hover {
-  opacity: 0.85;
-}
-
-/* pill — 랜딩페이지용 */
-.btn-pill {
-  border-radius: var(--radius-pill);
-  background: var(--accent);
-  color: #fff;
-  padding: 0.55em 1.4em;
-}
-
-/* ghost — 발표자료 네비게이션용 */
-.btn-ghost {
-  border-radius: var(--radius-card);
+  line-height: 1.2;
+  padding: 0.6em 1.2em;
+  border: 1px solid transparent;
+  border-radius: var(--corner);
   background: transparent;
   color: var(--text);
-  padding: 0.4em 0.8em;
+  text-decoration: none;
+  cursor: pointer;
+  transition: background-color var(--motion-fast) var(--motion-ease),
+              border-color var(--motion-fast) var(--motion-ease);
+}
+
+.btn:disabled,
+.btn[aria-disabled="true"] {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+
+/* primary — 화면에서 가장 중요한 행동 하나 */
+.btn-primary {
+  background: var(--accent);
+  color: var(--on-accent);
+}
+
+.btn-primary:hover:not(:disabled) {
+  background: color-mix(in oklab, var(--accent), var(--text) 15%);
+}
+
+/* secondary — 그 외 행동 */
+.btn-secondary {
+  border-color: var(--input-border);
+}
+
+.btn-secondary:hover:not(:disabled) {
+  background: var(--surface);
+}
+
+/* ghost — 내비게이션·아이콘 버튼처럼 장식을 최소화할 때 */
+.btn-ghost {
+  color: var(--muted);
+}
+
+.btn-ghost:hover:not(:disabled) {
+  color: var(--text);
+  background: var(--surface);
+}
+
+/* ─── Tag ───────────────────────────────────────────────── */
+/* 기본 태그는 선만, 코어 분류는 옅은 accent 면. 선택 상태 표시에는 쓰지 않는다(밑줄·굵기로 처리). */
+
+.tag {
+  display: inline-flex;
+  align-items: center;
+  font-size: var(--size-xs);
+  font-weight: var(--weight-semibold);
+  line-height: 1.5;
+  padding: 1px var(--space-2);
+  border: 1px solid var(--border);
+  border-radius: var(--corner);
+  color: var(--muted);
+  white-space: nowrap;
+}
+
+.tag-accent {
+  background: var(--accent-soft);
+  border-color: transparent;
+  color: var(--on-accent-soft);
+}
+
+/* ─── Input ─────────────────────────────────────────────── */
+
+.input {
+  width: 100%;
+  min-width: 0;
+  font-size: var(--size-sm);
+  padding: 0.55em 0.8em;
+  background: var(--surface);
+  color: var(--text);
+  border: 1px solid var(--input-border);
+  border-radius: var(--corner);
+  transition: border-color var(--motion-fast) var(--motion-ease);
+}
+
+.input::placeholder {
+  color: var(--subtle);
+}
+
+.input:focus-visible {
+  outline: none;
+  border-color: var(--accent);
+  box-shadow: 0 0 0 1px var(--accent);
+}
+
+.input:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
 }
 
 /* ─── Callout ───────────────────────────────────────────── */
+/* 왼쪽 굵은 바 없이 면 색으로 구분. 톤은 3가지뿐: 기본 / accent / warning */
 
 .callout {
-  border-left: 4px solid var(--callout-gray-border);
-  background: var(--callout-gray-bg);
-  padding: 0.75rem 1rem;
-  font-family: var(--font-serif);
-  font-size: var(--text-card-desc);
-  line-height: 1.6;
+  background: var(--surface);
+  border-radius: var(--corner);
+  padding: var(--space-3) var(--space-4);
+  font-size: var(--size-sm);
+  line-height: var(--line-normal);
+  color: var(--text);
 }
 
-.callout-gray   { border-color: var(--callout-gray-border);   background: var(--callout-gray-bg);   }
-.callout-brown  { border-color: var(--callout-brown-border);  background: var(--callout-brown-bg);  }
-.callout-orange { border-color: var(--callout-orange-border); background: var(--callout-orange-bg); }
-.callout-yellow { border-color: var(--callout-yellow-border); background: var(--callout-yellow-bg); }
-.callout-green  { border-color: var(--callout-green-border);  background: var(--callout-green-bg);  }
-.callout-blue   { border-color: var(--callout-blue-border);   background: var(--callout-blue-bg);   }
-.callout-purple { border-color: var(--callout-purple-border); background: var(--callout-purple-bg); }
-.callout-pink   { border-color: var(--callout-pink-border);   background: var(--callout-pink-bg);   }
-.callout-red    { border-color: var(--callout-red-border);    background: var(--callout-red-bg);    }
+.callout-label {
+  display: block;
+  font-size: var(--size-xs);
+  font-weight: var(--weight-bold);
+  color: var(--muted);
+  margin-bottom: var(--space-1);
+}
+
+.callout-accent { background: var(--accent-soft); }
+.callout-accent .callout-label { color: var(--on-accent-soft); }
+
+/* 막혔던 지점·삽질·주의사항에만 */
+.callout-warning { background: var(--warning-soft); }
+.callout-warning .callout-label { color: var(--warning); }
+
+/* ─── Prose ─────────────────────────────────────────────── */
+/* 블로그 본문처럼 오래 읽는 글. 세리프(Maru Buri)는 이 안에서만 쓴다. */
+
+.prose {
+  font-family: var(--family-serif);
+  font-size: var(--size-base);
+  line-height: var(--line-prose);
+  max-width: var(--max-w-prose);
+  color: var(--text);
+}
+
+.prose > * + * { margin-top: 1.1em; }
+.prose > :first-child { margin-top: 0; }
+
+.prose :is(h1, h2, h3, h4) {
+  font-family: var(--family-sans);
+  margin-top: 2em;
+}
+
+.prose :is(h1, h2, h3, h4) + * { margin-top: 0.6em; }
+
+.prose :not(pre) > code {
+  background: var(--surface);
+  border-radius: var(--corner);
+  padding: 0.1em 0.35em;
+}
+
+.prose pre {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--corner);
+  padding: var(--space-4);
+  overflow-x: auto;
+  line-height: var(--line-normal);
+}
+
+.prose blockquote {
+  border-left: 2px solid var(--border);  /* 인용 표시라는 의미가 있는 선 — 카드 포인트 바와 다름 */
+  padding-left: var(--space-4);
+  color: var(--muted);
+}
+
+.prose :is(ul, ol) { padding-left: 1.3em; }
+
+.prose figcaption {
+  font-family: var(--family-sans);
+  font-size: var(--size-sm);
+  color: var(--subtle);
+  text-align: center;
+  margin-top: var(--space-2);
+}
 
 /* ─── Timeline (horizontal) ─────────────────────────────── */
 
 .timeline {
   display: flex;
   align-items: flex-start;
-  gap: 0;
-  max-width: var(--max-w-chart);
+  max-width: var(--max-w-wide);
   overflow-x: auto;
 }
 
 .timeline-item {
   flex: 1;
+  min-width: 8rem;
   position: relative;
-  padding-top: 1.5rem;
+  padding-top: var(--space-6);
 }
 
 /* 연결선 */
@@ -146,16 +328,16 @@
   display: none;
 }
 
-/* dot */
+/* dot — 4px 규칙의 예외(원래 둥근 것) */
 .timeline-dot {
   position: absolute;
   top: 0;
   left: 0;
   width: 0.9rem;
   height: 0.9rem;
-  border-radius: 50%;
+  border-radius: var(--corner-round);
   background: var(--border);
-  border: 2px solid var(--surface);
+  border: 2px solid var(--bg);
 }
 
 .timeline-item.is-active .timeline-dot {
@@ -163,29 +345,18 @@
 }
 
 .timeline-label {
-  font-family: var(--font-sans);
-  font-size: var(--text-card-label);
+  font-size: var(--size-xs);
   font-weight: var(--weight-semibold);
-  color: var(--muted);
-  text-transform: uppercase;
-  letter-spacing: 0.08em;
-  padding-left: 1.4rem;
+  color: var(--subtle);
+  font-variant-numeric: tabular-nums;
+  padding-right: var(--space-4);
 }
 
 .timeline-title {
-  font-family: var(--font-sans);
-  font-size: var(--text-card-title);
+  font-size: var(--size-base);
   font-weight: var(--weight-semibold);
+  letter-spacing: var(--letter-tight);
   color: var(--text);
-  padding-left: 1.4rem;
-  margin-top: 0.25rem;
-}
-
-/* ─── Slide note ────────────────────────────────────────── */
-
-.slide-note {
-  font-family: var(--font-serif);
-  font-size: var(--text-note);
-  color: var(--muted);
-  line-height: 1.6;
+  margin-top: var(--space-1);
+  padding-right: var(--space-4);
 }

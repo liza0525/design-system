@@ -1,168 +1,177 @@
 /* Lizzie Design System — Design Tokens */
+/* 1) 원시값(primitives) → 2) 역할 토큰(roles) → 3) Tailwind v4 매핑 순서.
+   컴포넌트와 프로젝트 코드는 역할 토큰만 쓴다. 원시값은 역할 토큰을 정의할 때만 참조. */
 
-/* ─── Font families ─────────────────────────────────────── */
+/* ─── Theme switching ───────────────────────────────────── */
+/* 역할 색 토큰은 light-dark()로 한 번만 정의한다.
+   - 기본: OS 설정을 따름
+   - .dark / [data-theme="dark"]  → 다크 고정
+   - .light / [data-theme="light"] → 라이트 고정 */
+
+:root                { color-scheme: light dark; }
+.light, [data-theme="light"] { color-scheme: light; }
+.dark,  [data-theme="dark"]  { color-scheme: dark; }
+
+/* ─── Primitives: warm gray ─────────────────────────────── */
+/* 노란기를 줄인 웜 그레이. 라이트와 다크가 모두 이 단계에서 나온다. */
 
 :root {
-  --font-sans:  "Pretendard", sans-serif;
-  --font-serif: "Maru Buri", serif;
+  --gray-50:  #fbfaf8;
+  --gray-100: #f3f1ed;
+  --gray-200: #e3dfd8;
+  --gray-300: #ccc7bf;
+  --gray-400: #a8a399;
+  --gray-500: #8a857c;
+  --gray-600: #68635b;
+  --gray-700: #57524b;
+  --gray-800: #33302b;
+  --gray-900: #1f1d1a;
+  --gray-950: #161513;
 }
 
-/* ─── Type scale ────────────────────────────────────────── */
+/* ─── Primitives: slate blue / terracotta ───────────────── */
 
 :root {
-  --text-eyebrow:    0.94rem;
-  --text-h2:         clamp(2rem, 5vw, 3.6rem);
-  --text-card-label: 0.7rem;
-  --text-card-title: 1rem;
-  --text-card-desc:  0.8rem;
-  --text-note:       0.96rem;
+  --blue-100: #e6ecf4;
+  --blue-300: #b4c6df;
+  --blue-400: #8fa9cc;
+  --blue-600: #3d5a80;
+  --blue-700: #2f4a6e;
+  --blue-900: #222a35;
 
-  --tracking-eyebrow: 0.22em;
+  --terra-100: #f8ece5;
+  --terra-400: #e0906b;
+  --terra-600: #a8502c;
+  --terra-900: #2b1f19;
+}
 
-  --weight-black:    900;
+/* ─── Roles: color ──────────────────────────────────────── */
+/*                     light            dark                 대비(라이트 / 다크, 배경 기준) */
+
+:root {
+  --bg:           light-dark(var(--gray-50),  var(--gray-950));
+  --surface:      light-dark(var(--gray-100), var(--gray-900));
+  --border:       light-dark(var(--gray-200), var(--gray-800));   /* 장식용 구분선 */
+  --input-border: light-dark(var(--gray-500), var(--gray-500));   /* 입력창·보조 버튼 테두리  3.52 / 4.98 */
+
+  --text:         light-dark(var(--gray-900), var(--gray-100));   /* 본문        16.1 / 16.2 */
+  --muted:        light-dark(var(--gray-700), var(--gray-400));   /* 보조 텍스트  7.42 / 7.27 */
+  --subtle:       light-dark(var(--gray-600), var(--gray-500));   /* 메타·플레이스홀더 5.71 / 4.98 */
+
+  --accent:         light-dark(var(--blue-600), var(--blue-400)); /* 링크·주요 버튼·활성  6.77 / 7.57 */
+  --accent-soft:    light-dark(var(--blue-100), var(--blue-900)); /* 옅은 강조 면 */
+  --on-accent:      light-dark(#ffffff,         var(--gray-950)); /* accent 위 글자 */
+  --on-accent-soft: light-dark(var(--blue-700), var(--blue-300)); /* accent-soft 위 글자 */
+
+  --warning:      light-dark(var(--terra-600), var(--terra-400));  /* 주의 레이블 */
+  --warning-soft: light-dark(var(--terra-100), var(--terra-900));  /* 주의 콜아웃 면 */
+}
+
+/* ─── Roles: typography ─────────────────────────────────── */
+
+:root {
+  --family-sans:  "Pretendard Variable", "Pretendard", -apple-system, BlinkMacSystemFont, system-ui,
+                  "Apple SD Gothic Neo", "Malgun Gothic", sans-serif;
+  --family-serif: "Maru Buri", "Nanum Myeongjo", "AppleMyungjo", Georgia, serif;   /* 장문 본문 전용 */
+  --family-mono:  ui-monospace, "SFMono-Regular", Menlo, Consolas, monospace;
+
+  /* 크기 — 13px이 하한. 이보다 작은 글씨는 쓰지 않는다. */
+  --size-xs:      0.8125rem;  /* 13px  태그·레이블·아이브로우 */
+  --size-sm:      0.875rem;   /* 14px  설명·메타·버튼 */
+  --size-base:    1rem;       /* 16px  본문 */
+  --size-lg:      1.125rem;   /* 18px  리드·목록 제목 */
+  --size-xl:      1.375rem;   /* 22px  h3 */
+  --size-2xl:     1.75rem;    /* 28px  h2 */
+  --size-3xl:     2.25rem;    /* 36px  h1 */
+  --size-display: clamp(2rem, 5vw, 3.25rem);  /* 히어로·표지 */
+
+  --line-tight:  1.25;  /* 제목 */
+  --line-snug:   1.4;   /* 짧은 제목·카드 제목 */
+  --line-normal: 1.6;   /* UI 본문 */
+  --line-prose:  1.8;   /* 장문 본문 */
+
+  --letter-tight:  -0.022em;  /* 제목 */
+  --letter-normal: 0;
+
+  --weight-regular:  400;
+  --weight-medium:   500;
   --weight-semibold: 600;
+  --weight-bold:     700;
 }
 
-/* ─── Layout ────────────────────────────────────────────── */
-
-:root {
-  --radius-card: 0px;
-  --radius-pill: 999px;
-
-  --max-w-card:  900px;
-  --max-w-chart: 820px;
-}
-
-/* ─── Spacing scale ─────────────────────────────────────── */
+/* ─── Roles: space / shape / layout / motion ────────────── */
 
 :root {
   --space-1:  0.25rem;   /*  4px */
   --space-2:  0.5rem;    /*  8px */
   --space-3:  0.75rem;   /* 12px */
   --space-4:  1rem;      /* 16px */
+  --space-5:  1.25rem;   /* 20px */
   --space-6:  1.5rem;    /* 24px */
   --space-8:  2rem;      /* 32px */
+  --space-10: 2.5rem;    /* 40px */
   --space-12: 3rem;      /* 48px */
   --space-16: 4rem;      /* 64px */
-}
 
-/* ─── Animation ─────────────────────────────────────────── */
+  --corner:       4px;     /* 카드·버튼·태그·입력창·콜아웃 공통 */
+  --corner-round: 9999px;  /* 예외: 점(dot)·아바타처럼 원래 둥근 것만 */
 
-:root {
-  --transition-slide: 0.4s ease;
-}
+  --max-w-prose: 42rem;    /* 장문 본문 (~68자) */
+  --max-w-wide:  60rem;    /* 카드 그룹·목록·차트 */
 
-/* ─── Base palette ─────────────────────────────────────── */
-
-:root {
-  --bg:      #f6f2eb;  /* 크림 배경 */
-  --surface: #edeae2;  /* 카드/서피스 */
-  --border:  #e4ddd0;  /* 구분선 */
-  --muted:   #9a9590;  /* 보조 텍스트 */
-  --text:    #282420;  /* 본문 오프블랙 */
-  --accent:  #3d5a80;  /* 슬레이트블루 */
-  --accent2: #b85c38;  /* 테라코타 */
-}
-
-.dark {
-  --bg:      #0d1117;
-  --surface: #161b22;
-  --border:  #21262d;
-  --muted:   #555e6a;
-  --text:    #e8e0d0;
-  --accent:  #4a7fa5;
-  --accent2: #c9b48a;
-}
-
-/* ─── Callout colors (Notion 9-color, retuned for cream bg) */
-/* Usage: border-left: 4px solid var(--callout-{name}-border); background: var(--callout-{name}-bg) */
-
-:root {
-  --callout-gray-bg:    #eeebe4; --callout-gray-border:   #9a9590;
-  --callout-brown-bg:   #f2ece3; --callout-brown-border:  #8c6d4f;
-  --callout-orange-bg:  #f5ece2; --callout-orange-border: #c46a2d;
-  --callout-yellow-bg:  #f5eedc; --callout-yellow-border: #b89040;
-  --callout-green-bg:   #e8ede5; --callout-green-border:  #5a8060;
-  --callout-blue-bg:    #e5ecf2; --callout-blue-border:   #3d5a80;
-  --callout-purple-bg:  #ede9f2; --callout-purple-border: #7055a0;
-  --callout-pink-bg:    #f2e8ee; --callout-pink-border:   #a06080;
-  --callout-red-bg:     #f2e8e5; --callout-red-border:    #b85c38;
-}
-
-.dark {
-  --callout-gray-bg:    #1a1e26; --callout-gray-border:   #4a5568;
-  --callout-brown-bg:   #1e1812; --callout-brown-border:  #6b4f30;
-  --callout-orange-bg:  #1e1610; --callout-orange-border: #8a4a1e;
-  --callout-yellow-bg:  #1c1a0c; --callout-yellow-border: #7a6030;
-  --callout-green-bg:   #0e1a14; --callout-green-border:  #3d6050;
-  --callout-blue-bg:    #0c1520; --callout-blue-border:   #4a7fa5;
-  --callout-purple-bg:  #160e20; --callout-purple-border: #5a4080;
-  --callout-pink-bg:    #1e1018; --callout-pink-border:   #784060;
-  --callout-red-bg:     #1e0e0c; --callout-red-border:    #a04030;
-}
-
-/* ─── Dark mode (system preference) ────────────────────── */
-/* .dark 클래스(수동 토글)와 병행 — 둘 다 동작함 */
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --bg:      #0d1117;
-    --surface: #161b22;
-    --border:  #21262d;
-    --muted:   #555e6a;
-    --text:    #e8e0d0;
-    --accent:  #4a7fa5;
-    --accent2: #c9b48a;
-
-    --callout-gray-bg:    #1a1e26; --callout-gray-border:   #4a5568;
-    --callout-brown-bg:   #1e1812; --callout-brown-border:  #6b4f30;
-    --callout-orange-bg:  #1e1610; --callout-orange-border: #8a4a1e;
-    --callout-yellow-bg:  #1c1a0c; --callout-yellow-border: #7a6030;
-    --callout-green-bg:   #0e1a14; --callout-green-border:  #3d6050;
-    --callout-blue-bg:    #0c1520; --callout-blue-border:   #4a7fa5;
-    --callout-purple-bg:  #160e20; --callout-purple-border: #5a4080;
-    --callout-pink-bg:    #1e1018; --callout-pink-border:   #784060;
-    --callout-red-bg:     #1e0e0c; --callout-red-border:    #a04030;
-  }
+  --motion-fast:  150ms;
+  --motion-base:  250ms;
+  --motion-ease:  cubic-bezier(0.2, 0, 0, 1);
 }
 
 /* ─── Tailwind v4 @theme inline mapping ────────────────── */
+/* Tailwind로 처리할 때만 적용되고, 일반 CSS로 import하면 브라우저가 무시한다.
+   원시 토큰 이름(--family-*, --size-* …)은 Tailwind 네임스페이스와 겹치지 않게 지어서
+   자기 참조가 생기지 않는다.
+   간격은 Tailwind 기본(--spacing: 0.25rem)과 --space-N이 같은 값이라 매핑하지 않는다. (p-4 = --space-4) */
 
 @theme inline {
-  /* fonts */
-  --font-family-sans:  var(--font-sans);
-  --font-family-serif: var(--font-serif);
+  /* colors → bg-bg, bg-surface, border-border, border-input, text-ink, text-muted … */
+  --color-bg:             var(--bg);
+  --color-surface:        var(--surface);
+  --color-border:         var(--border);
+  --color-input:          var(--input-border);
+  --color-ink:            var(--text);
+  --color-muted:          var(--muted);
+  --color-subtle:         var(--subtle);
+  --color-accent:         var(--accent);
+  --color-accent-soft:    var(--accent-soft);
+  --color-on-accent:      var(--on-accent);
+  --color-on-accent-soft: var(--on-accent-soft);
+  --color-warning:        var(--warning);
+  --color-warning-soft:   var(--warning-soft);
 
-  /* type scale */
-  --font-size-eyebrow:    var(--text-eyebrow);
-  --font-size-h2:         var(--text-h2);
-  --font-size-card-label: var(--text-card-label);
-  --font-size-card-title: var(--text-card-title);
-  --font-size-card-desc:  var(--text-card-desc);
-  --font-size-note:       var(--text-note);
+  /* fonts → font-sans, font-serif, font-mono */
+  --font-sans:  var(--family-sans);
+  --font-serif: var(--family-serif);
+  --font-mono:  var(--family-mono);
 
-  --letter-spacing-eyebrow: var(--tracking-eyebrow);
+  /* sizes → text-xs … text-3xl, text-display */
+  --text-xs:      var(--size-xs);      --text-xs--line-height:      var(--line-normal);
+  --text-sm:      var(--size-sm);      --text-sm--line-height:      var(--line-normal);
+  --text-base:    var(--size-base);    --text-base--line-height:    var(--line-normal);
+  --text-lg:      var(--size-lg);      --text-lg--line-height:      var(--line-snug);
+  --text-xl:      var(--size-xl);      --text-xl--line-height:      var(--line-snug);
+  --text-2xl:     var(--size-2xl);     --text-2xl--line-height:     var(--line-tight);
+  --text-3xl:     var(--size-3xl);     --text-3xl--line-height:     var(--line-tight);
+  --text-display: var(--size-display); --text-display--line-height: var(--line-tight);
 
-  /* spacing */
-  --spacing-1:  var(--space-1);
-  --spacing-2:  var(--space-2);
-  --spacing-3:  var(--space-3);
-  --spacing-4:  var(--space-4);
-  --spacing-6:  var(--space-6);
-  --spacing-8:  var(--space-8);
-  --spacing-12: var(--space-12);
-  --spacing-16: var(--space-16);
+  /* tracking / leading → tracking-tight, leading-prose … */
+  --tracking-tight:  var(--letter-tight);
+  --leading-tight:   var(--line-tight);
+  --leading-snug:    var(--line-snug);
+  --leading-normal:  var(--line-normal);
+  --leading-prose:   var(--line-prose);
 
-  /* layout */
-  --border-radius-card: var(--radius-card);
-  --border-radius-pill: var(--radius-pill);
+  /* radius → rounded-box (rounded-full은 Tailwind 기본) */
+  --radius-box: var(--corner);
 
-  /* colors */
-  --color-bg:      var(--bg);
-  --color-surface: var(--surface);
-  --color-border:  var(--border);
-  --color-muted:   var(--muted);
-  --color-ink:     var(--text);
-  --color-accent:  var(--accent);
-  --color-accent2: var(--accent2);
+  /* layout → max-w-reading, max-w-wide (max-w-prose는 Tailwind 기본 65ch와 겹쳐서 피함) */
+  --container-reading:  var(--max-w-prose);
+  --container-wide:     var(--max-w-wide);
 }
